@@ -1,0 +1,157 @@
+calculator_6 xml
+------------------
+
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter first no:"
+        android:layout_row="0"
+        android:layout_column="0"/>
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/et1"
+        android:layout_row="0"
+        android:layout_column="1"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter second no:"
+        android:layout_row="1"
+        android:layout_column="0"/>
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/et2"
+        android:layout_row="1"
+        android:layout_column="1"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txt1"
+        android:layout_row="2"
+        android:layout_column="0"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Clear"
+        android:id="@+id/c"
+        android:layout_row="3"
+        android:layout_column="0"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add"
+        android:id="@+id/b1"
+        android:layout_row="4"
+        android:layout_column="0"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sub"
+        android:id="@+id/b2"
+        android:layout_row="4"
+        android:layout_column="1"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mul"
+        android:id="@+id/b3"
+        android:layout_row="4"
+        android:layout_column="2"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Div"
+        android:id="@+id/b4"
+        android:layout_row="4"
+        android:layout_column="3"/>
+
+</GridLayout>
+
+
+javacode
+----------
+
+package com.example.calculatorgrid;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        EditText et1,et2;
+        Button b1,b2,b3,b4,c;
+        TextView txt1;
+        et1=findViewById(R.id.et1);
+        et2=findViewById(R.id.et2);
+        txt1=findViewById(R.id.txt1);
+        b1=findViewById(R.id.b1);
+        b2=findViewById(R.id.b2);
+        b3=findViewById(R.id.b3);
+        b4=findViewById(R.id.b4);
+        c=findViewById(R.id.c);
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Double a=Double.parseDouble(et1.getText().toString());
+                Double b=Double.parseDouble(et2.getText().toString());
+                Double r=a+b;
+                txt1.setText("Result="+String.valueOf(r));
+            }
+        });
+        b2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Double a=Double.parseDouble(et1.getText().toString());
+                Double b=Double.parseDouble(et2.getText().toString());
+                Double r=a-b;
+                txt1.setText("Result="+String.valueOf(r));
+            }
+        });
+        b3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Double a=Double.parseDouble(et1.getText().toString());
+                Double b=Double.parseDouble(et2.getText().toString());
+                Double r=a*b;
+                txt1.setText("Result="+String.valueOf(r));
+            }
+        });
+        b4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Double a=Double.parseDouble(et1.getText().toString());
+                Double b=Double.parseDouble(et2.getText().toString());
+                Double r=a/b;
+                txt1.setText("Result="+String.valueOf(r));
+            }
+        });
+        c.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                et1.setText("");
+                et2.setText("");
+                txt1.setText("");
+            }
+        });
+    }
+}
+javacode

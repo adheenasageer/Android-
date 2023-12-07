@@ -1,0 +1,140 @@
+calculator Xml
+***************
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter 1st number:"/>
+    <EditText
+        android:id="@+id/et1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter 2nd Number"/>
+    <EditText
+        android:id="@+id/et2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CLEAR"
+        android:id="@+id/cl"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/b1"
+            android:text="ADD"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/b2"
+            android:text="SUB"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/b3"
+            android:text="MUL"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/b4"
+            android:text="DIV"/>
+    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv1"/>
+</LinearLayout>
+
+MainActivity.Java
+******************
+
+package com.example.calculator;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+public class MainActivity extends AppCompatActivity {
+    Button b,bb,bc,bd,cl;
+    EditText et1,et2;
+    TextView tv1;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        b=findViewById(R.id.b1);
+        bb=findViewById(R.id.b2);
+        bc=findViewById(R.id.b3);
+        bd=findViewById(R.id.b4);
+        et1=findViewById(R.id.et1);
+        et2=findViewById(R.id.et2);
+        tv1=findViewById(R.id.tv1);
+        cl=findViewById(R.id.cl);
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Double a1=Double.parseDouble(et1.getText().toString());
+                Double a2=Double.parseDouble(et2.getText().toString());
+                Double a3=a1+a2;
+                tv1.setText("result="+String.valueOf(a3));
+            }
+        });
+        bb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Double a1 = Double.parseDouble(et1.getText().toString());
+                Double a2 = Double.parseDouble(et2.getText().toString());
+                Double a3 = a1 - a2;
+                tv1.setText("result=" + String.valueOf(a3));
+            }
+        });
+        bc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Double a1 = Double.parseDouble(et1.getText().toString());
+                Double a2 = Double.parseDouble(et2.getText().toString());
+                Double a3 = a1*a2;
+                tv1.setText("result=" + String.valueOf(a3));
+            }
+        });
+        bd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Double a1 = Double.parseDouble(et1.getText().toString());
+                Double a2 = Double.parseDouble(et2.getText().toString());
+                Double a3 = a1/a2;
+                tv1.setText("result=" + String.valueOf(a3));
+            }
+        });
+        cl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                et1.setText("");
+                et2.setText("");
+                tv1.setText("");
+            }
+        });
+    }
+}
+

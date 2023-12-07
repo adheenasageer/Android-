@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/item1"
+        android:title="File"/>
+    <item android:id="@+id/item2"
+        android:title="Edit">
+        <menu>
+            <item android:id="@+id/sub1"
+                android:title="Cut"/>
+            <item android:id="@+id/sub2"
+                android:title="Copy"/>
+            <item android:id="@+id/sub3"
+                android:title="Paste"/>
+        </menu>
+    </item>
+    <item android:id="@+id/item3"
+        android:title="View"/>
+</menu>
+
+
+package com.example.menu;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item){
+        switch(item.getItemId()){
+            case R.id.item1:
+                Toast.makeText(this, "File Selected", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.item2:
+                Toast.makeText(this, "Edit Selected", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.sub1:
+                Toast.makeText(this, "Cut Selected", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.sub2:
+                Toast.makeText(this, "Copy Selected", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.sub3:
+                Toast.makeText(this, "Paste Selected", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.item3:
+                Toast.makeText(this, "View Selected", Toast.LENGTH_SHORT).show();
+                break;
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+}

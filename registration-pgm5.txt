@@ -1,0 +1,117 @@
+     MainActivity.java
+     *****************
+
+package com.example.registrationstore;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+
+public class MainActivity extends AppCompatActivity {
+    EditText name,age,email,address,quali;
+    Button button;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        name=findViewById(R.id.name);
+        age=findViewById(R.id.age);
+        email=findViewById(R.id.email);
+        address=findViewById(R.id.address);
+        quali=findViewById(R.id.q);
+        button=findViewById(R.id.b);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i=new Intent(MainActivity.this,MainActivity2.class);
+                startActivity(i);
+            }
+        });
+    }
+    protected void onResume(){
+        super.onResume();
+        SharedPreferences sh=getSharedPreferences("MysharedPref",MODE_PRIVATE);
+        String s1 = sh.getString("name","");
+        int a = sh.getInt("age",0);
+        String s2 = sh.getString("email", "");
+        String s3 = sh.getString("address", "");
+        String s4 = sh.getString("quali", "");
+        name.setText(s1);
+        age.setText(String.valueOf(a));
+        email.setText(s2);
+        address.setText(s3);
+        quali.setText(s4);
+    }
+    protected void onPause() {
+        super.onPause();
+        SharedPreferences sharedPreferences = getSharedPreferences("MysharedPref", MODE_PRIVATE);
+        SharedPreferences.Editor myEdit = sharedPreferences.edit();
+        myEdit.putString("name", name.getText().toString());
+        myEdit.putInt("age", Integer.parseInt(age.getText().toString()));
+        myEdit.putString("email", email.getText().toString());
+        myEdit.putString("address", address.getText().toString());
+        myEdit.putString("quali", quali.getText().toString());
+        myEdit.commit();
+    }
+}
+
+
+
+
+       activity_main.xml
+       *****************
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Registration"
+        android:textColor="@color/purple_500"
+        android:textSize="30dp"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Name"
+        android:id="@+id/name"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Age"
+        android:id="@+id/age"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="email"
+        android:id="@+id/email"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Address"
+        android:id="@+id/address"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Qualification"
+        android:id="@+id/q"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:id="@+id/b"/>
+
+
+</LinearLayout>

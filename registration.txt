@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="REGISTRATION"
+
+        android:textSize="30dp"/>
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="NAME"
+        android:id="@+id/name"/>
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="MOBILE NUMBER"
+        android:id="@+id/mobile"/>
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="AGE"
+        android:id="@+id/age"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GENDER"
+        android:textSize="20dp"
+        android:textColor="@color/design_default_color_primary"/>
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/RG">
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/radiobutton1"
+        android:text="Male"/>
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/radiobutton2"
+        android:text="Female"/>
+</RadioGroup>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="submit"
+        android:id="@+id/button"/>
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="i agree all terms and conditions"
+        android:id="@+id/checkbox"/>
+
+</LinearLayout>
+
+
+
+
+
+
+Java.xml
+
+
+package com.example.myapplication;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+    EditText name;
+    EditText mobileno;
+    EditText age;
+    RadioGroup RG;
+    RadioButton male;
+    RadioButton female;
+    CheckBox checkBox;
+    Button button;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        name = findViewById(R.id.name);
+        mobileno = findViewById(R.id.mobile);
+        age = findViewById(R.id.age);
+        RG = findViewById(R.id.RG);
+        male = findViewById(R.id.radiobutton1);
+        female = findViewById(R.id.radiobutton2);
+        checkBox = findViewById(R.id.checkbox);
+        button=findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (error()) {
+                    Toast.makeText(getApplicationContext(), "Registration completed", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+
+        private boolean error () {
+            if (name.getText().toString().length() == 0) {
+                Toast.makeText(getApplicationContext(), "Please enter the name" ,Toast.LENGTH_LONG).show();
+                return false;
+            } else if (mobileno.getText().toString().length() != 10) {
+                Toast.makeText(getApplicationContext(), "please enter 10 number", Toast.LENGTH_LONG).show();
+                ;
+                return false;
+            } else if (age.getText().toString().length() == 0) {
+                Toast.makeText(getApplicationContext(), "please enter age", Toast.LENGTH_LONG).show();
+                return false;
+            } else if (!male.isChecked() && !female.isChecked()) {
+                Toast.makeText(getApplicationContext(), "please choose radio button", Toast.LENGTH_LONG).show();
+                return false;
+            } else if (!checkBox.isChecked()) {
+                Toast.makeText(getApplicationContext(), "please click on checkbox", Toast.LENGTH_LONG).show();
+                return false;
+            } else {
+                return true;
+
+            }
+        }
+    }
